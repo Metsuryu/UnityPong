@@ -30,7 +30,7 @@ function resetBall() {
 var ballHitAudio: AudioSource;
 ballHitAudio = GetComponent.<AudioSource>();
 function OnCollisionEnter2D (colInfo : Collision2D) {
-
+    //Ball collides with player
     if (colInfo.collider.tag == "Player") {
         var velY = GetComponent.<Rigidbody2D>().velocity.y;
         GetComponent.<Rigidbody2D>().velocity.y = velY / 2 + colInfo.collider.GetComponent.<Rigidbody2D>().velocity.y / 2;
@@ -40,3 +40,14 @@ function OnCollisionEnter2D (colInfo : Collision2D) {
     }
 }
 
+function Update() {
+    var xVel: float = GetComponent.<Rigidbody2D>().velocity.x;
+    //If the ball gets too slow, speed it up.
+    if (xVel < 5f && xVel > -5 && xVel != 0) {
+        if (xVel > 0) {
+            GetComponent.<Rigidbody2D>().velocity.x = 8;
+        } else {
+            GetComponent.<Rigidbody2D>().velocity.x = -8;
+        }
+    }
+}
