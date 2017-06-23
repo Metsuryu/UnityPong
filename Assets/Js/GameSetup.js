@@ -10,6 +10,9 @@ var rightWall: BoxCollider2D;
 var Player1: Transform;
 var Player2: Transform;
 
+var escKey: KeyCode;
+static var isGamePaused = false;
+
 function Start() {
     //Constraints
     topWall.size = new Vector2(mainCam.ScreenToWorldPoint(new Vector3(Screen.width * 2f, 0f, 0f)).x, 1f);
@@ -26,4 +29,23 @@ function Start() {
 
     Player1.position.x = mainCam.ScreenToWorldPoint(new Vector3(75f, 0f, 0f)).x;
     Player2.position.x = mainCam.ScreenToWorldPoint(new Vector3(Screen.width - 75f, 0f, 0f)).x;
+}
+
+
+function pauseGame() {
+    if (!isGamePaused) {
+        isGamePaused = true;
+    } else if(isGamePaused) {
+        isGamePaused = false;
+        BroadcastMessage("startBall");
+    };
+    //TODO: Pause menu
+    Debug.Log("Esc");
+}
+
+function Update() {
+    if (Input.GetKeyDown(escKey)) {
+        //Menu
+        pauseGame();
+    }
 }
