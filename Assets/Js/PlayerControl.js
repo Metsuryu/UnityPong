@@ -35,7 +35,7 @@ function AIPlayer(AILevel) {
         //If the ball is close to the right side
         if (BallX > rightSide) {
             var randAngle = Random.Range(-0.5, 0.5);
-            moveAI(BallPos + randAngle, speed / 1.5);
+            moveAI(BallPos + randAngle, speed * 2);
         }
     }
 }

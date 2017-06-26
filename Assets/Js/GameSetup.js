@@ -13,6 +13,9 @@ var Player2: Transform;
 var escKey: KeyCode;
 static var isGamePaused = false;
 
+var menuUI: UnityEngine.Object;
+
+
 function Start() {
     //Constraints
     topWall.size = new Vector2(mainCam.ScreenToWorldPoint(new Vector3(Screen.width * 2f, 0f, 0f)).x, 1f);
@@ -31,7 +34,6 @@ function Start() {
     Player2.position.x = mainCam.ScreenToWorldPoint(new Vector3(Screen.width - 75f, 0f, 0f)).x;
 }
 
-
 function pauseGame() {
     if (!isGamePaused) {
         isGamePaused = true;
@@ -39,8 +41,12 @@ function pauseGame() {
         isGamePaused = false;
         BroadcastMessage("startBall");
     };
-    //TODO: Pause menu
-    Debug.Log("Esc");
+    //Pause menu (ESC)
+    if (!menuUI) {
+        menuUI = Canvas.Instantiate(Resources.Load("PauseMenu"));
+    } else {
+        Destroy(menuUI);
+    };
 }
 
 function Update() {
